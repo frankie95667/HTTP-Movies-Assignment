@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 
 const MovieCard = props => {
   const { title, director, metascore, stars, id } = props.movie;
+
+  useEffect(() => {
+    console.log(props.movie);
+  })
 
   const deleteMovie = (e) => {
     e.preventDefault();
@@ -24,7 +28,7 @@ const MovieCard = props => {
       </div>
       <h3>Actors</h3>
 
-      {stars.map(star => (
+      {stars && stars.map(star => (
         <div key={star} className="movie-star">
           {star}
         </div>

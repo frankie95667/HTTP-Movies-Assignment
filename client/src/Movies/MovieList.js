@@ -1,12 +1,30 @@
 import React, {useEffect} from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import MovieCard from "./MovieCard";
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyle = makeStyles(theme => ({
+  fab: {
+    position: 'fixed',
+    bottom: '20px',
+    right: '20px'
+  }
+}))
 
 function MovieList({ movies, setMovies }) {
+  const {push} = useHistory();
+  const classes = useStyle();
   useEffect(() => {
-
+    console.log(movies);
   }, [movies])
 
+  const goToAddMovieForm = (e) => {
+    e.preventDefault();
+    push('/add-movie');
+  }
+  
   return (
     <div className="movie-list">
       {
@@ -16,6 +34,10 @@ function MovieList({ movies, setMovies }) {
           </Link>
         ))
       }
+      <Fab onClick={goToAddMovieForm} className={classes.fab} color='primary'>
+        <AddIcon />
+      </Fab>
+
     </div>
   );
 }
